@@ -3,6 +3,16 @@
 // methods/website-architecture.md: "two thin data modules", no live platform reads
 // from the public site). Update this file when that JSON changes.
 
+// Canonical origin for <link rel="canonical">, the sitemap and JSON-LD. Until DNS cuts
+// over, the Vercel production URL counts as live (content-engine.json ->
+// website.production_host): set NEXT_PUBLIC_SITE_URL in Vercel to that host, and change
+// it to https://titanfloors.ca in the same pass the agents repo rewrites Direct URLs.
+// Falls back to Vercel's own production host, then the real domain.
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://titanfloors.ca")
+).replace(/\/$/, "");
+
 export const nap = {
   name: "Titan Flooring Inc.",
   address: "1060 Britannia Rd East #2, Mississauga, ON L4W 4T1",
