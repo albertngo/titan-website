@@ -128,3 +128,8 @@
     @apply font-sans;
   }
 }
+/* titanfloors.ca page background (site cream) */
+:root {
+  --background: #f3f1e7;
+  --foreground: #293895;
+}
