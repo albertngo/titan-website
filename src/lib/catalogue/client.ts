@@ -26,7 +26,13 @@ function fixture(): Promise<PublicProduct[]> {
 
 async function rest<T>(path: string): Promise<T> {
   const res = await fetch(`${URL}/rest/v1/${path}`, {
-    headers: { apikey: KEY as string, Authorization: `Bearer ${KEY}`, "Accept-Profile": "api" },
+    headers: {
+      apikey: KEY as string,
+      "Accept-Profile": "api",
+      // Legacy anon keys are JWTs and go in Authorization too; the newer sb_publishable_ keys
+      // are not JWTs and must only be sent as `apikey`.
+      ...(KEY?.startsWith("eyJ") ? { Authorization: `Bearer ${KEY}` } : {}),
+    },
     next: { revalidate: REVALIDATE, tags: ["catalogue"] },
   });
   // Throwing keeps the last good page on a failed revalidation instead of publishing an empty one.
