@@ -5,10 +5,22 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { announcement, LIVE, nav } from "./site-data";
 import { ChevronDown, HeartIcon, SearchIcon } from "./icons";
+import { useWishlist } from "./wishlist";
+
+function NavLink({ href, children, onClick }: { href: string; children: React.ReactNode; onClick?: () => void }) {
+  return href.startsWith("/") ? (
+    <Link href={href} onClick={onClick}>
+      {children}
+    </Link>
+  ) : (
+    <a href={href}>{children}</a>
+  );
+}
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
+  const count = useWishlist().length;
 
   useEffect(() => {
     if (!open) return;
@@ -34,9 +46,10 @@ export function Header() {
             Snag a free estimate
           </a>
           <div className="hdr-right">
-            <a className="hdr-heart" href={`${LIVE}/wishlist/`} aria-label="Wishlist">
+            <Link className="hdr-heart" href="/wishlist/" aria-label={`Wishlist${count ? ` (${count})` : ""}`}>
               <HeartIcon />
-            </a>
+              {count > 0 && <span className="hdr-count">{count}</span>}
+            </Link>
             <button className="hdr-burger" type="button" aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)}>
               <span />
               <span />
@@ -48,15 +61,15 @@ export function Header() {
           <ul>
             {nav.map((item) => (
               <li key={item.label}>
-                <a href={item.href}>
+                <NavLink href={item.href}>
                   {item.label}
                   {item.children && <ChevronDown />}
-                </a>
+                </NavLink>
                 {item.children && (
                   <ul className="sub">
                     {item.children.map((c) => (
                       <li key={c.label}>
-                        <a href={c.href}>{c.label}</a>
+                        <NavLink href={c.href}>{c.label}</NavLink>
                       </li>
                     ))}
                   </ul>
@@ -93,14 +106,18 @@ export function Header() {
                     <ul className="sub">
                       {item.children.map((c) => (
                         <li key={c.label}>
-                          <a href={c.href}>{c.label}</a>
+                          <NavLink href={c.href} onClick={() => setOpen(false)}>
+                            {c.label}
+                          </NavLink>
                         </li>
                       ))}
                     </ul>
                   )}
                 </>
               ) : (
-                <a href={item.href}>{item.label}</a>
+                <NavLink href={item.href} onClick={() => setOpen(false)}>
+                  {item.label}
+                </NavLink>
               )}
             </li>
           ))}

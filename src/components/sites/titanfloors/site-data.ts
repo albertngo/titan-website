@@ -25,12 +25,12 @@ export const nav: NavItem[] = [
     label: "Hardwood",
     href: "#",
     children: [
-      { label: "Solid Hardwood", href: `${LIVE}/product-category/solid-hardwood/` },
-      { label: "Engineered Hardwood", href: `${LIVE}/product-category/engineered-hardwood/` },
+      { label: "Solid Hardwood", href: "/product-category/solid-hardwood/" },
+      { label: "Engineered Hardwood", href: "/product-category/engineered-hardwood/" },
     ],
   },
-  { label: "Laminate", href: `${LIVE}/product-category/laminate/` },
-  { label: "Vinyl", href: `${LIVE}/product-category/vinyl/` },
+  { label: "Laminate", href: "/product-category/laminate/" },
+  { label: "Vinyl", href: "/product-category/vinyl/" },
   {
     label: "Install",
     href: "#",
@@ -46,14 +46,13 @@ export const nav: NavItem[] = [
 
 const IMG = "/sites/titanfloors/img";
 
-// Not links on the live site; kept that way for the 1:1 pass.
 export const categories = [
-  { label: "Solid Hardwood", img: `${IMG}/1-1.png`, alt: "hardwood floors in Mississauga" },
-  { label: "Engineered Hardwood", img: `${IMG}/2-1.png`, alt: "engineered hardwood" },
-  { label: "Laminate", img: `${IMG}/3-1.png`, alt: "laminate flooring" },
-  { label: "Vinyl", img: `${IMG}/4-2.png`, alt: "vinyl flooring" },
-  { label: "Tiles", img: `${IMG}/5.png`, alt: "tile flooring in bathroom" },
-  { label: "Accessories", img: `${IMG}/titan_flooring_types.png`, alt: "construction supplies Mississauga" },
+  { label: "Solid Hardwood", href: "/product-category/solid-hardwood/", img: `${IMG}/1-1.png`, alt: "hardwood floors in Mississauga" },
+  { label: "Engineered Hardwood", href: "/product-category/engineered-hardwood/", img: `${IMG}/2-1.png`, alt: "engineered hardwood" },
+  { label: "Laminate", href: "/product-category/laminate/", img: `${IMG}/3-1.png`, alt: "laminate flooring" },
+  { label: "Vinyl", href: "/product-category/vinyl/", img: `${IMG}/4-2.png`, alt: "vinyl flooring" },
+  { label: "Tiles", href: "/product-category/tile/", img: `${IMG}/5.png`, alt: "tile flooring in bathroom" },
+  { label: "Accessories", href: "/product-category/accessories/", img: `${IMG}/titan_flooring_types.png`, alt: "construction supplies Mississauga" },
 ];
 
 export const steps = [
@@ -107,7 +106,7 @@ export const featuredPosts = [
 
 export const footerMenu = [
   { label: "Home", href: "/" },
-  { label: "All Products", href: `${LIVE}/shop/` },
+  { label: "All Products", href: "/shop/" },
   { label: "Flooring Installation", href: `${LIVE}/flooring-install/` },
   { label: "Stair Refinishing", href: `${LIVE}/stair-refinishing/` },
   { label: "About Us", href: `${LIVE}/about-us/` },
@@ -115,7 +114,14 @@ export const footerMenu = [
   { label: "Contact Us", href: `${LIVE}/contact/` },
 ];
 
-export const footerProducts = ["Solid Hardwood", "Engineered Hardwood", "Laminate", "Vinyl", "Tile", "Accessories"];
+export const footerProducts = [
+  { label: "Solid Hardwood", href: "/product-category/solid-hardwood/" },
+  { label: "Engineered Hardwood", href: "/product-category/engineered-hardwood/" },
+  { label: "Laminate", href: "/product-category/laminate/" },
+  { label: "Vinyl", href: "/product-category/vinyl/" },
+  { label: "Tile", href: "/product-category/tile/" },
+  { label: "Accessories", href: "/product-category/accessories/" },
+];
 
 export const hours = ["Mon – Fri (7:30am – 6pm)", "Saturday (8:30am – 5pm)", "Sunday (Closed)"];
 
