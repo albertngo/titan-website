@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import "@/components/sites/titanfloors/titanfloors.css";
+import "@/components/sites/titanfloors/catalogue/catalogue.css";
 
 const cysan = localFont({
   src: "../../public/sites/titanfloors/fonts/cysan-regular.woff",
