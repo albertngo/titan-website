@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ContactForm } from "./contact-form";
 import { FadeIn } from "./fade-in";
+import { LeadForm } from "./forms/lead-form";
+import { UtmCapture } from "./forms/utm";
 import { Header } from "./header";
 import { FacebookIcon, InstagramIcon, LongArrowRight, TiktokIcon } from "./icons";
 import { ReviewsCarousel } from "./reviews-carousel";
@@ -27,6 +28,7 @@ const stepWidths = [
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
     <div className="tf">
+      <UtmCapture />
       <Header />
       <main>{children}</main>
       <SiteFooter />
@@ -129,7 +131,7 @@ function SiteFooter() {
               </a>
             </div>
           </div>
-          <ContactForm />
+          <LeadForm kind="contact" />
         </FadeIn>
       </section>
 

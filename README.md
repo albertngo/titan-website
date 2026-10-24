@@ -45,6 +45,25 @@ and a wishlist (`/wishlist/`, quote request by email) read **Titan Desk's public
 - Code: data access in `src/lib/catalogue/`, pages in `src/app/product-category`, `src/app/product`,
   `src/app/shop`, UI in `src/components/sites/titanfloors/catalogue/`.
 
+## Lead forms
+
+Every form on the site (footer card, wishlist quote request, product "Check price &
+availability") is one component, `src/components/sites/titanfloors/forms/lead-form.tsx`, posting
+to `src/app/api/lead/route.ts`. The route checks the input (`src/lib/leads/validate.ts`), drops
+bots quietly (hidden honeypot field, sent faster than a person could), limits each address to 5
+leads per 10 minutes, then sends one request to the Make scenario **"Website → GHL (titan-website
+forms)"** (4997514) through `src/lib/leads/make.ts` — the only file that talks to Make.
+
+- Make, with its own GHL connection, upserts the contact (source `website`, first-touch UTM in the
+  UTM custom fields), adds the tags `website` + `website-<contact|wishlist|product>`, and adds a
+  note starting "Website Inquiry:" with the page, square footage, next step and items. The site
+  holds no GHL token. The request bodies are built in `src/lib/leads/ghl.ts`.
+- A visitor sees "sent" only when Make answers `{"ok":true,"contactId":…}`; anything else shows
+  "please call or email us".
+- First-touch UTM: `forms/utm.ts` stores the first `utm_*` visit in the `tf_utm` cookie for 90 days.
+- Setup: switch the scenario on in Make, then add `LEAD_MAKE_HOOK` and `LEAD_MAKE_KEY` to this
+  project's Vercel environment variables (server-only) and redeploy.
+
 ## Designing with AI
 
 `.claude/skills/` carries vendored design skills (taste-skill) and 74 `DESIGN.md`

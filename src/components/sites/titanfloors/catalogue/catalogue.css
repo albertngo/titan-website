@@ -232,3 +232,33 @@
   .tf .pp-specs { padding: 0 10px 20px; }
   .tf .pp-calc { padding: 28px 16px; }
 }
+
+/* ---------- Lead forms on cream pages (wishlist, product) ---------- */
+.tf .lead-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 760px; margin: 0 0 24px; }
+.tf .lead-form .full { grid-column: 1 / -1; }
+.tf .lead-form input:not([type="radio"]):not([type="checkbox"]), .tf .lead-form textarea {
+  width: 100%; border: 1px solid var(--navy); border-radius: 10px; background: #fff; color: var(--navy);
+  font: 500 15px/1.5 var(--font-inter), sans-serif; padding: 9px 14px; outline: none;
+}
+.tf .lead-form input:focus-visible, .tf .lead-form textarea:focus-visible { border-color: var(--orange); box-shadow: 0 0 0 2px rgba(207, 99, 53, 0.25); }
+.tf .lead-form textarea { min-height: 110px; resize: vertical; }
+.tf .lead-form ::placeholder { color: rgba(41, 56, 149, 0.6); }
+.tf .lead-form button {
+  height: 48px; border: 0; border-radius: 50px; background: var(--orange); color: var(--cream); cursor: pointer;
+  font: 600 14px/1.5 var(--font-inter), sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.tf .lead-form button:hover { background: var(--navy); }
+.tf .lead-form button:disabled, .tf .contact-form button:disabled { opacity: 0.7; cursor: wait; }
+.tf .lead-steps { border: 0; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; }
+.tf .lead-steps legend { font-weight: 700; margin-bottom: 6px; }
+.tf .lead-opt { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.45; cursor: pointer; }
+.tf .lead-opt input { accent-color: var(--navy); width: 16px; height: 16px; margin: 2px 0 0; flex: none; }
+.tf .lead-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.tf .lead-error { color: #b3261e; font-weight: 600; }
+.tf .contact-form .lead-error { color: #ffd2c2; }
+.tf .lead-sent { font-size: 17px; line-height: 1.5; }
+.tf .lead-sent a { text-decoration: underline; }
+.tf .wish-form-title { font-size: 24px; margin: 10px 0 14px; }
+.tf .pp-inquiry { flex-basis: 100%; margin-top: 6px; }
+.tf .pp-inquiry .serif { margin-bottom: 12px; }
+@media (max-width: 767px) { .tf .lead-form { grid-template-columns: 1fr; } }

@@ -1,25 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { LeadForm } from "../forms/lead-form";
 import { contact } from "../site-data";
 import { clearWishlist, removeFromWishlist, useWishlist } from "../wishlist";
 
 export function WishlistView() {
   const items = useWishlist();
-  const body = [
-    "Hi Titan Flooring,",
-    "",
-    "I'd like a quote for these floors:",
-    ...items.map((i) => `- ${i.name}${i.sku ? ` (item ${i.sku})` : ""}`),
-    "",
-    "Square footage: ",
-    "City: ",
-    "Installation needed? ",
-    "",
-    "Thanks!",
-  ].join("\n");
-  const quoteHref = `mailto:${contact.email}?subject=${encodeURIComponent("Quote request from my wishlist")}&body=${encodeURIComponent(body)}`;
-
   return (
     <section className="wish boxed">
       <nav className="crumbs" aria-label="Breadcrumb">
@@ -49,13 +36,12 @@ export function WishlistView() {
             ))}
           </ul>
           <div className="pp-actions">
-            <a className="btn" href={quoteHref}>
-              Request a quote
-            </a>
             <button type="button" className="wish-clear" onClick={clearWishlist}>
               Clear list
             </button>
           </div>
+          <h2 className="serif wish-form-title">Request a quote</h2>
+          <LeadForm kind="wishlist" items={items.map((i) => ({ name: i.name, sku: i.sku, slug: i.slug }))} look="page" />
           <p className="wish-note">
             Prefer to talk? Call <a href={contact.phoneHref}>{contact.phoneDisplay}</a> or visit us at {contact.addressShort}, Mississauga.
           </p>
