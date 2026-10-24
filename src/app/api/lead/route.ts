@@ -54,3 +54,8 @@ export async function POST(request: NextRequest) {
     return reply({ ok: false, error: FALLBACK }, 502);
   }
 }
+
+/** Setup check: says whether this deployment can see each Make setting (never their values). */
+export function GET() {
+  return Response.json({ hook: Boolean(process.env.LEAD_MAKE_HOOK), key: Boolean(process.env.LEAD_MAKE_KEY), env: process.env.VERCEL_ENV ?? null });
+}
