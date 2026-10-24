@@ -6,6 +6,7 @@ import type { PublicProduct } from "@/lib/catalogue/types";
 import { Calculator } from "@/components/sites/titanfloors/catalogue/calculator";
 import { Gallery, type GalleryImage } from "@/components/sites/titanfloors/catalogue/gallery";
 import { PriceTag, ProductCard, statusBadges } from "@/components/sites/titanfloors/catalogue/product-card";
+import { ProductInquiry } from "@/components/sites/titanfloors/forms/product-inquiry";
 import { SiteShell } from "@/components/sites/titanfloors/sections";
 import { contact } from "@/components/sites/titanfloors/site-data";
 import { WishlistButton } from "@/components/sites/titanfloors/wishlist";
@@ -120,9 +121,6 @@ export default async function ProductPage({ params }: Params) {
   const variants = (p.variants ?? []).filter((v) => slugBySku.has(v.sku));
   const pairs = (p.pairs_well_with ?? []).filter((v) => slugBySku.has(v.sku));
   const pageUrl = `${SITE}/product/${slug}/`;
-  const quoteHref = `mailto:${contact.email}?subject=${encodeURIComponent(`Price & availability: ${name}`)}&body=${encodeURIComponent(
-    `Hi Titan Flooring,\n\nI'd like the price and availability for:\n${name} (item ${p.sku})\n${pageUrl}\n\nSquare footage: \nCity: \n\nThanks!`,
-  )}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -217,9 +215,7 @@ export default async function ProductPage({ params }: Params) {
 
             <hr className="pp-rule" />
             <div className="pp-actions">
-              <a className="btn pp-cta" href={quoteHref}>
-                Check price &amp; availability
-              </a>
+              <ProductInquiry item={{ name, sku: p.sku, slug }} />
               <WishlistButton item={{ slug, name, sku: p.sku }} />
             </div>
             <a className="pp-contact" href={`mailto:${contact.email}`}>
